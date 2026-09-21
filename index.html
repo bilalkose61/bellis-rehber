@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Bellis Deluxe | Personel App</title>
+    
+    <link rel="icon" type="image/png" href="img/bellis-logo.png">
+    <link rel="apple-touch-icon" href="img/bellis-logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        bellis: {
+                            navy: '#1E293B',
+                            gold: '#D4AF37',
+                            goldLight: '#FBF8F1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body { 
+            -webkit-font-smoothing: antialiased; 
+            background-color: #F8FAFC; 
+            height: 100%;
+            height: 100dvh; 
+            overflow: hidden; 
+            overscroll-behavior-y: none; 
+            width: 100vw;
+            max-width: 100%;
+        }
+        
+        .scroll-container {
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden; 
+            -webkit-overflow-scrolling: touch; 
+            padding-bottom: 110px; 
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: scroll-position;
+        }
+
+        .safe-nav {
+            padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+        }
+
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(to right, #B48E2D, #D4AF37, #C6A56F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-slate-700 font-sans relative">
+
+    <div class="scroll-container scroll-smooth relative z-0">
+        
+        <div class="max-w-md mx-auto relative overflow-hidden">
+
+            <header class="pt-12 pb-8 px-6 flex flex-col items-center relative">
+                
+                <div class="absolute top-6 right-6 bg-white/80 backdrop-blur-md border border-slate-200/60 p-1 rounded-full flex gap-1 shadow-sm z-20">
+                    <button onclick="changeLang('tr')" id="btn-tr" class="lang-btn px-3 py-1.5 text-[10px] tracking-wider font-bold rounded-full bg-bellis-gold text-white shadow-md transition-all">TR</button>
+                    <button onclick="changeLang('en')" id="btn-en" class="lang-btn px-3 py-1.5 text-[10px] tracking-wider font-bold rounded-full text-slate-500 hover:text-bellis-navy transition-all">EN</button>
+                    <button onclick="changeLang('ru')" id="btn-ru" class="lang-btn px-3 py-1.5 text-[10px] tracking-wider font-bold rounded-full text-slate-500 hover:text-bellis-navy transition-all">RU</button>
+                </div>
+
+                <div class="w-28 h-28 sm:w-32 sm:h-32 bg-white rounded-[2rem] flex items-center justify-center border border-slate-100 shadow-[0_20px_40px_-15px_rgba(212,175,55,0.2)] mb-6 transform hover:scale-105 transition-transform duration-500">
+                    <img src="img/bellis-logo.png" alt="Bellis Logo" class="w-24 h-24 sm:w-28 sm:h-28 object-contain">
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl font-serif text-bellis-navy tracking-tight text-center leading-tight">
+                    BELLIS <br>
+                    <span class="text-gradient-gold text-lg sm:text-xl tracking-[0.25em] uppercase font-sans font-semibold">Deluxe Hotel</span>
+                </h1>
+                <p id="t-subtitle" class="text-[11px] uppercase tracking-[0.2em] text-slate-400 mt-4 font-semibold text-center">Dijital Personel Portalı</p>
+            </header>
+
+            <main class="px-5 space-y-8">
+
+                <section id="iletisim" class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="smartphone" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-phones-title" class="text-lg font-bold text-bellis-navy tracking-wide">Bellis+ Duyuru</h2>
+                    </div>
+                    <p id="t-intro-text" class="text-xs text-slate-500 leading-relaxed mb-4 text-justify">
+                        Bellis Deluxe Hotel ailesine hoş geldiniz! Bu dijital personel portalı, otelimizdeki operasyonel süreçleri kolaylaştırmak, tesis planına anında ulaşmanızı sağlamak ve yönetim kadromuzla olan iletişimi güçlendirmek için tasarlandı.
+                    </p>
+                    <div class="p-4 bg-bellis-goldLight/50 border border-bellis-gold/10 rounded-2xl flex items-center gap-3">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-bellis-gold shrink-0"></i>
+                        <p id="t-intro-feature" class="text-[11px] text-slate-600 font-medium">Duyurularımız bu bölümden yayımlancaktır!</p>
+                    </div>
+                </section>
+
+                <section id="egitim" class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-24 -mt-16 relative z-0">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="users" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-vid-title" class="text-lg font-bold text-bellis-navy tracking-wide">Yönetici Kadromuz</h2>
+                    </div>
+                    
+                    <!-- YENİ: YÖNETİCİ KADROSU FOTOĞRAF ALANI -->
+                    <div onclick="openOrgModal()" class="overflow-hidden rounded-2xl border border-slate-100 relative group bg-slate-50 p-1 cursor-pointer">
+                        <img src="img/yonetim.jpg" alt="Yönetici Kadrosu" class="w-full h-auto rounded-xl opacity-90 group-hover:opacity-100 transition-opacity shadow-inner">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="bg-white/90 backdrop-blur-md p-4 rounded-full text-bellis-navy shadow-lg transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="zoom-in" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="t-org-desc" class="text-xs text-slate-400 font-medium text-center mt-3">Tam ekran görmek için dokunun.</p>
+                </section>
+
+                <section id="harita" class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] pt-24 -mt-16 relative z-0">
+                    
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="map" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-map-title" class="text-lg font-bold text-bellis-navy tracking-wide">Tesis Planı</h2>
+                    </div>
+                    
+                    <div onclick="openMapModal()" class="overflow-hidden rounded-2xl border border-slate-100 relative group bg-slate-50 p-1 cursor-pointer">
+                        <img src="img/bellis-plan.jpeg" alt="Harita" class="w-full h-auto rounded-xl opacity-90 group-hover:opacity-100 transition-opacity shadow-inner">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="bg-white/90 backdrop-blur-md p-4 rounded-full text-bellis-navy shadow-lg transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="zoom-in" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="t-map-desc" class="text-xs text-slate-400 font-medium text-center mt-3 mb-8">Tam ekran görmek için dokunun.</p>
+
+                    <hr class="border-slate-100 mb-8">
+
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="gem" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-values-title" class="text-lg font-bold text-bellis-navy tracking-wide">Kurumsal Değerlerimiz</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mb-2">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center hover:border-bellis-gold/30 transition-colors">
+                            <i data-lucide="heart-handshake" class="w-6 h-6 mx-auto text-bellis-gold mb-2"></i>
+                            <p id="t-val-1-title" class="text-sm font-bold text-slate-700">Misafirperverlik</p>
+                            <p id="t-val-1-desc" class="text-[10px] text-slate-500 mt-1">Türk misafirperverliğini en üst düzeyde yaşatırız.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center hover:border-bellis-gold/30 transition-colors">
+                            <i data-lucide="award" class="w-6 h-6 mx-auto text-bellis-gold mb-2"></i>
+                            <p id="t-val-2-title" class="text-sm font-bold text-slate-700">Mükemmellik</p>
+                            <p id="t-val-2-desc" class="text-[10px] text-slate-500 mt-1">Her detayda kusursuz hizmeti hedefleriz.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center hover:border-bellis-gold/30 transition-colors">
+                            <i data-lucide="leaf" class="w-6 h-6 mx-auto text-bellis-gold mb-2"></i>
+                            <p id="t-val-3-title" class="text-sm font-bold text-slate-700">Sürdürülebilirlik</p>
+                            <p id="t-val-3-desc" class="text-[10px] text-slate-500 mt-1">Doğaya ve çevreye saygılı operasyonlar yürütürüz.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center hover:border-bellis-gold/30 transition-colors">
+                            <i data-lucide="users" class="w-6 h-6 mx-auto text-bellis-gold mb-2"></i>
+                            <p id="t-val-4-title" class="text-sm font-bold text-slate-700">Takım Ruhu</p>
+                            <p id="t-val-4-desc" class="text-[10px] text-slate-500 mt-1">Birlikte başarır, büyük bir aile olarak çalışırız.</p>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-0">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="clock" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-pdf-2-sec-title" class="text-lg font-bold text-bellis-navy tracking-wide">Çalışma ve Yemek Saatleri</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div onclick="openPdfModal('pdf/yemek-saatleri.pdf')" class="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white hover:border-bellis-gold/40 hover:shadow-md transition-all group cursor-pointer">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                                    <i data-lucide="clock" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 id="t-pdf-2-title" class="font-bold text-slate-700 group-hover:text-bellis-navy">Çalışma ve Yemek Saatleri</h3>
+                                    <p id="t-pdf-desc-2" class="text-[11px] text-slate-400 mt-0.5">PDF olarak görüntüle</p>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center group-hover:bg-bellis-gold transition-colors">
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-0">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="building" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-loj-title" class="text-lg font-bold text-bellis-navy tracking-wide">Lojman Bilgileri</h2>
+                    </div>
+                    
+                    <div class="w-full h-36 bg-slate-100 rounded-2xl border border-slate-200 mb-5 flex items-center justify-center overflow-hidden relative">
+                       <img src="img/lojman.jpg" alt="Lojman" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+                            <i data-lucide="bed" class="w-5 h-5 mx-auto text-bellis-gold mb-1"></i>
+                            <p id="t-loj-room" class="text-xs font-bold text-slate-700">Bellis</p>
+                            <p id="t-loj-room-val" class="text-[10px] text-slate-500">Personel Lojmanı</p>
+                        </div>
+                    </div>
+
+                    <p id="t-loj-desc" class="text-xs text-slate-500 leading-relaxed text-justify">
+                        Personel lojmanımız otelimize sadece 10 dakika uzaklıkta yer almaktadır. İçerisinde ücretsiz Wi-Fi, çamaşırhane, kafeterya, futbol sahası, TV yayını, spor salonu, dinlenme alanları ve 24 saat sıcak su hizmeti sunulmaktadır.
+                    </p>
+                </section>
+
+                <section class="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-10 relative z-0">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-bellis-goldLight rounded-xl"><i data-lucide="clipboard-list" class="w-5 h-5 text-bellis-gold"></i></div>
+                        <h2 id="t-rules-title" class="text-lg font-bold text-bellis-navy tracking-wide">Genel Kurallar</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                                <i data-lucide="shirt" class="w-5 h-5 text-slate-500"></i>
+                            </div>
+                            <div>
+                                <h4 id="t-rule-1-title" class="text-sm font-bold text-slate-700">Kılık Kıyafet ve Yaka Kartı</h4>
+                                <p id="t-rule-1-desc" class="text-xs text-slate-500 mt-1 leading-relaxed">Görev süresince departmanınıza ait üniformayı eksiksiz giymek ve yaka kartınızı sol göğüs hizasında taşımak zorunludur.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                                <i data-lucide="cigarette-off" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h4 id="t-rule-2-title" class="text-sm font-bold text-slate-700">Sigara İçme Alanları</h4>
+                                <p id="t-rule-2-desc" class="text-xs text-slate-500 mt-1 leading-relaxed">Otel misafir alanlarında ve kapalı mekanlarda sigara içmek kesinlikle yasaktır. Sadece belirlenen personel mola alanlarını kullanınız.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                                <i data-lucide="smile" class="w-5 h-5 text-bellis-gold"></i>
+                            </div>
+                            <div>
+                                <h4 id="t-rule-3-title" class="text-sm font-bold text-slate-700">Güler Yüz ve Misafirperverlik</h4>
+                                <p id="t-rule-3-desc" class="text-xs text-slate-500 mt-1 leading-relaxed">Misafirlerimize her zaman güler yüzle yaklaşmak, göz teması kurmak ve sıcak bir karşılama sunmak Bellis Deluxe ailesinin en temel kuralıdır.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div> 
+
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-40 px-5 pt-2 pointer-events-none safe-nav">
+        <div class="glass-light flex justify-around items-center p-2 rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] pointer-events-auto border border-white">
+            
+            <a href="#iletisim" class="flex flex-col items-center gap-1 p-3 w-16 rounded-2xl hover:bg-slate-50 transition-colors text-bellis-gold">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                <span id="nav-1" class="text-[9px] font-bold tracking-wider">Duyurular</span>
+            </a>
+            
+            <a href="#harita" class="flex flex-col items-center gap-1 p-3 w-16 rounded-2xl hover:bg-slate-50 transition-colors text-slate-400 hover:text-bellis-gold">
+                <i data-lucide="map" class="w-5 h-5"></i>
+                <span id="nav-2" class="text-[9px] font-bold tracking-wider">Tesis</span>
+            </a>
+            
+            <a href="#egitim" class="flex flex-col items-center gap-1 p-3 w-16 rounded-2xl hover:bg-slate-50 transition-colors text-slate-400 hover:text-bellis-gold">
+                <i data-lucide="users" class="w-5 h-5"></i>
+                <span id="nav-3" class="text-[9px] font-bold tracking-wider">Yöneticilerimiz</span>
+            </a>
+
+        </div>
+    </nav>
+
+    <!-- HARİTA MODALI -->
+    <div id="mapModal" class="fixed inset-0 z-[100] hidden bg-slate-900/95 backdrop-blur-md flex-col items-center justify-center transition-opacity duration-300 opacity-0">
+        <div class="w-full flex justify-end p-5 absolute top-0 z-50">
+            <button onclick="closeMapModal()" class="bg-white/10 hover:bg-white/20 p-3 rounded-full text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="w-full h-full flex items-center justify-center p-4 overflow-hidden">
+            <img src="img/bellis-plan.jpeg" id="map-img-full" alt="Büyük Harita" 
+                 class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 origin-center cursor-zoom-in" 
+                 onclick="toggleZoom(event)">
+        </div>
+        <div id="t-modal-desc" class="absolute bottom-10 bg-black/50 px-4 py-2 rounded-full text-white/80 text-xs text-center pointer-events-none backdrop-blur-sm border border-white/10">
+            Yakınlaştırmak için haritaya dokunun
+        </div>
+    </div>
+
+    <!-- YENİ: YÖNETİCİ KADROSU FOTOĞRAF MODALI -->
+    <div id="orgModal" class="fixed inset-0 z-[100] hidden bg-slate-900/95 backdrop-blur-md flex-col items-center justify-center transition-opacity duration-300 opacity-0">
+        <div class="w-full flex justify-end p-5 absolute top-0 z-50">
+            <button onclick="closeOrgModal()" class="bg-white/10 hover:bg-white/20 p-3 rounded-full text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="w-full h-full flex items-center justify-center p-4 overflow-hidden">
+            <img src="img/yonetim.jpg" id="org-img-full" alt="Büyük Yönetim Kadrosu" 
+                 class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform duration-300 origin-center cursor-zoom-in" 
+                 onclick="toggleOrgZoom(event)">
+        </div>
+        <div id="t-org-modal-desc" class="absolute bottom-10 bg-black/50 px-4 py-2 rounded-full text-white/80 text-xs text-center pointer-events-none backdrop-blur-sm border border-white/10">
+            Yakınlaştırmak için fotoğrafa dokunun
+        </div>
+    </div>
+
+    <!-- PDF MODALI -->
+    <div id="pdfModal" class="fixed inset-0 z-[110] hidden bg-black flex-col transition-opacity duration-300 opacity-0">
+        <div class="w-full h-16 flex items-center justify-between px-4 absolute top-0 z-50 bg-black/80 backdrop-blur-md">
+            <div class="w-10"></div> 
+            <div class="flex items-center gap-1 text-white font-medium text-[15px]">
+                <span id="pdfModalTitle">belge.pdf</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400"></i>
+            </div>
+            <button onclick="closePdfModal()" class="w-8 h-8 rounded-full bg-[#1c1c1e] border border-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        <div class="w-full h-full pt-16 relative flex items-center justify-center">
+            <div class="absolute flex flex-col items-center justify-center text-gray-400 z-0">
+                <i data-lucide="loader-2" class="w-8 h-8 animate-spin mb-3"></i>
+                <span class="text-sm font-medium">Yükleniyor...</span>
+            </div>
+            <iframe id="pdfIframe" src="" class="w-full h-full relative z-10" style="background-color: transparent;" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        /* Harita Ayarları */
+        const mapModal = document.getElementById('mapModal');
+        const mapImgFull = document.getElementById('map-img-full');
+        let isZoomed = false;
+
+        function openMapModal() {
+            mapModal.classList.remove('hidden');
+            setTimeout(() => {
+                mapModal.classList.remove('opacity-0');
+                mapModal.classList.add('opacity-100');
+            }, 10);
+            
+            isZoomed = false;
+            mapImgFull.style.transform = "scale(1)";
+            mapImgFull.style.cursor = "zoom-in";
+        }
+
+        function closeMapModal() {
+            mapModal.classList.remove('opacity-100');
+            mapModal.classList.add('opacity-0');
+            setTimeout(() => {
+                mapModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function toggleZoom(e) {
+            if (!isZoomed) {
+                const rect = mapImgFull.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                mapImgFull.style.transformOrigin = `${x}% ${y}%`;
+                mapImgFull.style.transform = "scale(2.5)";
+                mapImgFull.style.cursor = "zoom-out";
+                isZoomed = true;
+            } else {
+                mapImgFull.style.transform = "scale(1)";
+                mapImgFull.style.cursor = "zoom-in";
+                isZoomed = false;
+            }
+        }
+
+        /* YENİ: Yönetici Kadrosu Fotoğraf Ayarları */
+        const orgModal = document.getElementById('orgModal');
+        const orgImgFull = document.getElementById('org-img-full');
+        let isOrgZoomed = false;
+
+        function openOrgModal() {
+            orgModal.classList.remove('hidden');
+            setTimeout(() => {
+                orgModal.classList.remove('opacity-0');
+                orgModal.classList.add('opacity-100');
+            }, 10);
+            
+            isOrgZoomed = false;
+            orgImgFull.style.transform = "scale(1)";
+            orgImgFull.style.cursor = "zoom-in";
+        }
+
+        function closeOrgModal() {
+            orgModal.classList.remove('opacity-100');
+            orgModal.classList.add('opacity-0');
+            setTimeout(() => {
+                orgModal.classList.add('hidden');
+            }, 300);
+        }
+
+        function toggleOrgZoom(e) {
+            if (!isOrgZoomed) {
+                const rect = orgImgFull.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                orgImgFull.style.transformOrigin = `${x}% ${y}%`;
+                orgImgFull.style.transform = "scale(2.5)";
+                orgImgFull.style.cursor = "zoom-out";
+                isOrgZoomed = true;
+            } else {
+                orgImgFull.style.transform = "scale(1)";
+                orgImgFull.style.cursor = "zoom-in";
+                isOrgZoomed = false;
+            }
+        }
+
+        /* PDF Okuyucu Ayarları - Google Viewer Entegrasyonu */
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfIframe = document.getElementById('pdfIframe');
+        const pdfModalTitle = document.getElementById('pdfModalTitle');
+
+        function openPdfModal(pdfUrl) {
+            const fileName = pdfUrl.split('/').pop();
+            pdfModalTitle.innerText = fileName;
+            
+            const tamAdres = window.location.href.split('#')[0] + pdfUrl;
+            pdfIframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(tamAdres) + "&embedded=true";
+            
+            pdfModal.classList.remove('hidden');
+            setTimeout(() => {
+                pdfModal.classList.remove('opacity-0');
+                pdfModal.classList.add('opacity-100');
+            }, 10);
+        }
+
+        function closePdfModal() {
+            pdfModal.classList.remove('opacity-100');
+            pdfModal.classList.add('opacity-0');
+            setTimeout(() => {
+                pdfModal.classList.add('hidden');
+                pdfIframe.src = ""; 
+            }, 300);
+        }
+
+        /* Çeviri Ayarları */
+        const translations = {
+            tr: {
+                "t-subtitle": "Dijital Personel Portalı",
+                "t-phones-title": "Bellis+ Duyuru",
+                "t-intro-text": "Bellis Deluxe Hotel ailesine hoş geldiniz! Bu dijital personel portalı, otelimizdeki operasyonel süreçleri kolaylaştırmak, tesis planına anında ulaşmanızı sağlamak ve yönetim kadromuzla olan iletişimi güçlendirmek için tasarlandı.",
+                "t-intro-feature": "Duyurularımız bu bölümden yayımlancaktır!",
+                "t-map-title": "Tesis Planı",
+                "t-map-desc": "Tam ekran görmek için dokunun.",
+                
+                "t-values-title": "Kurumsal Değerlerimiz",
+                "t-val-1-title": "Misafirperverlik",
+                "t-val-1-desc": "Türk misafirperverliğini en üst düzeyde yaşatırız.",
+                "t-val-2-title": "Mükemmellik",
+                "t-val-2-desc": "Her detayda kusursuz hizmeti hedefleriz.",
+                "t-val-3-title": "Sürdürülebilirlik",
+                "t-val-3-desc": "Doğaya ve çevreye saygılı operasyonlar yürütürüz.",
+                "t-val-4-title": "Takım Ruhu",
+                "t-val-4-desc": "Birlikte başarır, büyük bir aile olarak çalışırız.",
+                
+                "t-vid-title": "Yönetici Kadromuz",
+                "t-org-desc": "Tam ekran görmek için dokunun.",
+                "t-org-modal-desc": "Yakınlaştırmak için fotoğrafa dokunun",
+
+                "t-pdf-2-sec-title": "Çalışma ve Yemek Saatleri",
+                "t-pdf-2-title": "Çalışma ve Yemek Saatleri",
+                "t-pdf-desc-2": "PDF olarak görüntüle",
+                
+                "t-loj-title": "Lojman Bilgileri",
+                "t-loj-cap": "Kapasite",
+                "t-loj-cap-val": "450 Personel",
+                "t-loj-room": "Bellis ",
+                "t-loj-room-val": "Personel Lojmanı",
+                "t-loj-desc": "Personel lojmanımız otelimize sadece 10 dakika uzaklıkta yer almaktadır. İçerisinde ücretsiz Wi-Fi, çamaşırhane, kafeterya, futbol sahası, TV yayını, spor salonu, dinlenme alanları ve 24 saat sıcak su hizmeti sunulmaktadır.",
+                
+                "t-rules-title": "Genel Kurallar",
+                "t-rule-1-title": "Kılık Kıyafet ve Yaka Kartı",
+                "t-rule-1-desc": "Görev süresince departmanınıza ait üniformayı eksiksiz giymek ve yaka kartınızı sol göğüs hizasında taşımak zorunludur.",
+                "t-rule-2-title": "Sigara İçme Alanları",
+                "t-rule-2-desc": "Otel misafir alanlarında ve kapalı mekanlarda sigara içmek kesinlikle yasaktır. Sadece belirlenen personel mola alanlarını kullanınız.",
+                "t-rule-3-title": "Güler Yüz ve Misafirperverlik",
+                "t-rule-3-desc": "Misafirlerimize her zaman güler yüzle yaklaşmak, göz teması kurmak ve sıcak bir karşılama sunmak Bellis Deluxe ailesinin en temel kuralıdır.",
+
+                "nav-1": "Duyurular",
+                "nav-2": "Tesis",
+                "nav-3": "Yöneticilerimiz",
+                "t-modal-desc": "Yakınlaştırmak için haritaya dokunun"
+            },
+            en: {
+                "t-subtitle": "Digital Staff Portal",
+                "t-phones-title": "Bellis+ Announcements",
+                "t-intro-text": "Welcome to the Bellis Deluxe Hotel family! This digital staff portal is designed to streamline operational processes in our hotel, provide instant access to the resort map, and strengthen communication with our management team.",
+                "t-intro-feature": "Our announcements will be published in this section!",
+                "t-map-title": "Resort Map",
+                "t-map-desc": "Tap to view in full screen.",
+                
+                "t-values-title": "Our Corporate Values",
+                "t-val-1-title": "Hospitality",
+                "t-val-1-desc": "We keep Turkish hospitality alive at the highest level.",
+                "t-val-2-title": "Excellence",
+                "t-val-2-desc": "We aim for flawless service in every detail.",
+                "t-val-3-title": "Sustainability",
+                "t-val-3-desc": "We conduct operations with respect for nature and the environment.",
+                "t-val-4-title": "Team Spirit",
+                "t-val-4-desc": "We succeed together and work as a big family.",
+                
+                "t-vid-title": "Management Team",
+                "t-org-desc": "Tap to view in full screen.",
+                "t-org-modal-desc": "Tap on the photo to zoom in",
+
+                "t-pdf-2-sec-title": "Work & Meal Hours",
+                "t-pdf-2-title": "Work & Meal Hours",
+                "t-pdf-desc-2": "View as PDF",
+                
+                "t-loj-title": "Dormitory Information",
+                "t-loj-cap": "Capacity",
+                "t-loj-cap-val": "450 Staff",
+                "t-loj-room": "Bellis",
+                "t-loj-room-val": "staff housing",
+                "t-loj-desc": "Our staff dormitory is located just 10 minutes away from the hotel. It features free Wi-Fi, laundry facilities, a cafeteria, a football pitch, TV broadcasting, a gym, rest areas, and 24-hour hot water.",
+                
+                "t-rules-title": "General Rules",
+                "t-rule-1-title": "Dress Code and Name Badge",
+                "t-rule-1-desc": "It is mandatory to wear your department's uniform completely and wear your name badge on your left chest during working hours.",
+                "t-rule-2-title": "Smoking Areas",
+                "t-rule-2-desc": "Smoking is strictly prohibited in guest areas and indoors. Please use only designated staff break areas.",
+                "t-rule-3-title": "Smile and Hospitality",
+                "t-rule-3-desc": "Approaching our guests with a smile, making eye contact, and offering a warm welcome is the most fundamental rule of the Bellis Deluxe family.",
+
+                "nav-1": "Updates",
+                "nav-2": "Map",
+                "nav-3": "Managers",
+                "t-modal-desc": "Tap on the map to zoom in"
+            },
+            ru: {
+                "t-subtitle": "Портал для персонала",
+                "t-phones-title": "Объявления Bellis+",
+                "t-intro-text": "Добро пожаловать в семью Bellis Deluxe Hotel! Этот цифровой портал для персонала разработан для оптимизации операционных процессов в нашем отеле, обеспечения мгновенного доступа к плану курорта и укрепления связи с нашей управленческой командой.",
+                "t-intro-feature": "Наши объявления будут публиковаться в этом разделе!",
+                "t-map-title": "План Отеля",
+                "t-map-desc": "Нажмите на весь экран.",
+                
+                "t-values-title": "Наши Корпоративные Ценности",
+                "t-val-1-title": "Гостеприимство",
+                "t-val-1-desc": "Мы поддерживаем турецкое гостеприимство на самом высоком уровне.",
+                "t-val-2-title": "Совершенство",
+                "t-val-2-desc": "Мы стремимся к безупречному сервису в каждой детали.",
+                "t-val-3-title": "Устойчивость",
+                "t-val-3-desc": "Мы ведем свою деятельность с уважением к природе и окружающей среде.",
+                "t-val-4-title": "Командный дух",
+                "t-val-4-desc": "Мы добиваемся успеха вместе и работаем как одна большая семья.",
+                
+                "t-vid-title": "Руководство",
+                "t-org-desc": "Нажмите на весь экран.",
+                "t-org-modal-desc": "Нажмите на фото, чтобы увеличить",
+
+                "t-pdf-2-sec-title": "Часы работы и питания",
+                "t-pdf-2-title": "Часы работы и питания",
+                "t-pdf-desc-2": "Посмотреть в PDF",
+                
+                "t-loj-title": "Информация об общежитии",
+                "t-loj-cap": "Вместимость",
+                "t-loj-cap-val": "450 человек",
+                "t-loj-room": "Bellis",
+                "t-loj-room-val": "жилье для персонала",
+                "t-loj-desc": "Наше общежитие для персонала находится всего в 10 минутах от отеля. К услугам гостей бесплатный Wi-Fi, прачечная, кафетерий, футбольное поле, ТВ-вещание, тренажерный зал, зоны отдыха и круглосуточная горячая вода.",
+                
+                "t-rules-title": "Общие правила",
+                "t-rule-1-title": "Дресс-код и бейдж",
+                "t-rule-1-desc": "В рабочее время обязательно носить полную униформу вашего отдела и бейдж на левой стороне груди.",
+                "t-rule-2-title": "Места для курения",
+                "t-rule-2-desc": "Курение строго запрещено в гостевых зонах и в помещениях. Пожалуйста, используйте только специально отведенные места для отдыха.",
+                "t-rule-3-title": "Улыбка и гостеприимство",
+                "t-rule-3-desc": "Улыбаться нашим гостям, поддерживать зрительный контакт и предлагать теплый прием — самое фундаментальное правило семьи Bellis Deluxe.",
+
+                "nav-1": "Новости",
+                "nav-2": "Карта",
+                "nav-3": "Руководство",
+                "t-modal-desc": "Нажмите на карту, чтобы увеличить"
+            }
+        };
+
+        function changeLang(lang) {
+            for (let key in translations[lang]) {
+                const element = document.getElementById(key);
+                if(element) element.innerText = translations[lang][key];
+            }
+            
+            const btns = ['tr', 'en', 'ru'];
+            btns.forEach(b => {
+                const btn = document.getElementById('btn-' + b);
+                if(b === lang) {
+                    btn.classList.add('bg-bellis-gold', 'text-white', 'shadow-md');
+                    btn.classList.remove('text-slate-500', 'bg-transparent', 'shadow-none');
+                } else {
+                    btn.classList.remove('bg-bellis-gold', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-500', 'bg-transparent', 'shadow-none');
+                }
+            });
+        }
+
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-bellis-gold');
+                    l.classList.add('text-slate-400');
+                });
+                link.classList.remove('text-slate-400');
+                link.classList.add('text-bellis-gold');
+            });
+        });
+    </script>
+
+</body>
+</html>
